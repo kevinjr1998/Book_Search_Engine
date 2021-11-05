@@ -10,10 +10,10 @@ const resolvers = {
               });
           
               if (!foundUser) {
-                return res.status(400).json({ message: 'Cannot find a user with this id!' });
+                throw new AuthenticationError('You need to be logged in!');
               }
-          
-              
+
+              return foundUser;
           },
     },
 
@@ -23,7 +23,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
           },
-          login: async (parent, { email, password }) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
       
             if (!user) {
@@ -37,10 +37,9 @@ const resolvers = {
             }
       
             const token = signToken(user);
-      
             return { token, user };
           },
-          saveBook: async (parent, {SavedBookContent}, context) => {    
+        saveBook: async (parent, {SavedBookContent}, context) => {    
               if(context.user){
                   return await User.findOneAndUpdate(
                       {id: context.user._id},
@@ -50,7 +49,7 @@ const resolvers = {
               }
               throw new AuthenticationError('You need to be logged in!');
           },
-          removeBook: async (parent, {bookId}, context) => { 
+        removeBook: async (parent, {bookId}, context) => { 
               if(context.user){
                 return await User.findOneAndUpdate(
                     { _id: context.user._id },
