@@ -28,6 +28,7 @@ To install your own version that works locally, first, clone the repo to your lo
 To deploy your own version of the application, make sure you have a heroku account and a `MongoAtlas` database set up. Follow [these instrucions](https://devcenter.heroku.com/articles/git) to deploy your application to heroku. Once you have done this, go to your MongoAtlas database and find the option to connect application and copy the connection string. Update the connection string with your unsername, password and database name and go to the heroku page that relates to your application. On the settings tab, find the config vars section and in the `KEY` section, enter `MONGODB_URI` and in the `VALUE` section, enter your updated connection string. Once you have done this, the application should work in full.
 
 ## Usage
+![screenshot](./assets/BookSearchEngineScreenshot.png)
 
 ![demo](./assets/GoogleBookSearchGif.gif)
 
